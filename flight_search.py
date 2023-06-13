@@ -36,7 +36,8 @@ class FlightSearch:
             'nights_in_dst_to': 14,
             'ret_from_diff_city': False,
             'ret_to_diff_city': False,
-            'price_to': price_to
+            'price_to': price_to,
+            'max_stopovers': 0
         }
         response = requests.get(url=f"{self.endpoint}search", params=params, headers=self.headers)
         response.raise_for_status()
