@@ -62,7 +62,7 @@ update_iata()
 flights = search_for_flights()
 for city in flights:
     for flight in flights[city]:
-        message = f"Only €{flight.price} to fly from {flight.city_from}-{flight.fly_from_iata} " \
+        message = f"Only £{flight.price} to fly from {flight.city_from}-{flight.fly_from_iata} " \
                   f"to {city}-{flight.fly_to_iata}, " \
                   f"from {flight.departure_time.date()} to {flight.return_departure_time.date()}"
         sms_message(message, os.environ.get('MY_NUMBER'))

@@ -37,7 +37,11 @@ class FlightSearch:
             'ret_from_diff_city': False,
             'ret_to_diff_city': False,
             'price_to': price_to,
-            'max_stopovers': 0
+            'max_stopovers': 0,
+            'curr': "GBP",
+            "flight_type": "round",
+            "one_for_city": 1,
+
         }
         response = requests.get(url=f"{self.endpoint}search", params=params, headers=self.headers)
         response.raise_for_status()
