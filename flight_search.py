@@ -24,7 +24,7 @@ class FlightSearch:
         response.raise_for_status()
         return response.json()
 
-    def search_flights(self, iata_code_from, iata_code_to, price_to):
+    def search_flights(self, iata_code_from, iata_code_to, price_to, stop_overs=0):
         tomorrow = (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y")
         six_months_date = datetime.now().replace(month=datetime.now().month + 6).strftime("%d/%m/%Y")
         params = {
@@ -45,6 +45,7 @@ class FlightSearch:
         }
         response = requests.get(url=f"{self.endpoint}search", params=params, headers=self.headers)
         response.raise_for_status()
+        print(response.json())
         return response.json()
 
 

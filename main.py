@@ -19,7 +19,7 @@ def update_iata():
 
 # dm.update(city="Chicago", lowest_price=300)
 
-def search_for_flights():
+def search_for_flights(stop_overs=0):
     flights = {}
     sheet_data = dm.get_data_json()
     for row in sheet_data['prices']:
@@ -28,7 +28,8 @@ def search_for_flights():
         max_price = row['lowestPrice']
         flight_search_json = fs.search_flights(iata_code_from=from_airport,
                                                iata_code_to=iata_codes,
-                                               price_to=max_price-1)
+                                               price_to=max_price-1,
+                                               stop_overs=stop_overs)
         flight_json = flight_search_json['data']
         flights[city] = [FlightData(flight) for flight in flight_json]
         # for flight in flights[city]:
@@ -59,7 +60,7 @@ def sms_message(message, to_number):
     print(message.status)
 
 update_iata()
-flights = search_for_flights()
+flights = search_for_flights(stop_overs=1)
 for city in flights:
     for flight in flights[city]:
         message = f"Only £{flight.price} to fly from {flight.city_from}-{flight.fly_from_iata} " \
